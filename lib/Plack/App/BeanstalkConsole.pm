@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Plack::App::BeanstalkConsole;
-# ABSTRACT: ...
+# ABSTRACT: a web application that provides access to Beanstalk statistics and tools
 
 use parent 'Plack::App::PHPCGIFile';
 
@@ -32,29 +32,66 @@ sub call
 
 1;
 __END__
-
 =pod
 
 =head1 SYNOPSIS
 
-...
+    use Plack::App::BeanstalkConsole;
+    # accessable under /...
+    my $app = Plack::App::Console->new->to_app;
+
+    # Or mount on a specific path
+    use Plack::Builder;
+    builder {
+        # accessable under /beanstalk/...
+        mount beanstalk => Plack::App::BeanstalkConsole->new;
+    };
+
+See L<plackup> for how to quickly and easily mount this application from the
+command line.
 
 =head1 DESCRIPTION
 
+=for stopwords Petr Sergey Trofimov
 
-=head1 FUNCTIONS/METHODS
+This is a simple L<Plack> wrapper for the excellent
+L<Beanstalk Console|https://github.com/ptrofimov/beanstalk_console>
+application written in PHP by Петр Трофимов (Petr Trofimov)
+and Сергей Лысенко (Sergey Lysenko).
 
-=begin :list
+The latest version of the application is downloaded at install time and saved
+as a L<File::ShareDir|share dir>, which is used by default if the C<root> is
+not overridden (see below).
 
-* C<foo>
+=head1 METHODS
 
-=end :list
+=over 4
 
-...
+=item * C<new>
+
+    Plack::App::BeanstalkConsole->new(<options>)
+
+Options (passed as a hash):
+
+=over 4
+
+=item * C<root> (optional)
+
+If not provided, the PHP code that was downloaded at install time is used.
+However, you can override this option to point to any directory you wish, that
+contains the PHP code to be mounted. (In this way it functions just like
+L<Plack::App::PHPCGIFile>.)
+
+    Plack::App::BeanstalkConsole->new(root => 'path/to/beanstalk_console')
+
+=back
+
+=back
 
 =head1 EXTERNAL REQUIREMENTS
 
-The C<php-cgi> binary must be available in C<$PATH>.
+The C<php-cgi> binary must be available in C<$PATH>.  In newer versions of
+PHP, this is is normally installed as part of the main PHP installation.
 
 =head1 SUPPORT
 
@@ -64,12 +101,12 @@ Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Di
 (or L<bug-Plack-App-BeanstalkConsole@rt.cpan.org|mailto:bug-Plack-App-BeanstalkConsole@rt.cpan.org>).
 I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 
-=head1 ACKNOWLEDGEMENTS
-
-...
-
 =head1 SEE ALSO
 
-...
+L<Plack>
+
+L<Plack::App::PHPCGIFile>
+
+L<Beanstalk Console|https://github.com/ptrofimov/beanstalk_console>
 
 =cut
