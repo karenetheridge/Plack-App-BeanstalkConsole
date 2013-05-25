@@ -15,7 +15,6 @@
 *.gc??
 /test-mydeps-*
 /nytprof*
-/inc/
 .*.sw[a-z]
 /Plack-App-BeanstalkConsole-*
 /todo.txt
