@@ -8,7 +8,6 @@ with qw(
     Dist::Zilla::Role::InstallTool
 );
 
-use Class::Method::Modifiers ();
 use Dist::Zilla::Plugin::MakeMaker ();
 use File::Basename;
 
@@ -37,9 +36,14 @@ sub setup_installer
     my $url = $self->url;
     my $filename = basename($url);
 
-    Class::Method::Modifiers::install_modifier(
-        'Dist::Zilla::Plugin::MakeMaker',
-        around => share_dir_code => sub {
+    # unfortunately there is no better way currently of modifying what
+    # MakeMaker does, other than subclassing MakeMaker and replacing it
+    # entirely
+    my $meta = Class::MOP::class_of('Dist::Zilla::Plugin::MakeMaker');
+    $meta->make_mutable;
+    Moose::Util::add_method_modifier(
+        $meta,
+        around => [ share_dir_code => sub {
             my $orig = shift;
             my $self = shift;
 
@@ -75,8 +79,9 @@ NEWCODE
                 if not $share_dir_code->{postamble};
 
             return $share_dir_code;
-        },
+        } ],
     );
+    $meta->make_immutable;
 }
 
 1;
