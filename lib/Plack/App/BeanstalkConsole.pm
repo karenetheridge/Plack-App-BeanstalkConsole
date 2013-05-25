@@ -3,7 +3,32 @@ use warnings;
 package Plack::App::BeanstalkConsole;
 # ABSTRACT: ...
 
+use parent 'Plack::App::PHPCGIFile';
 
+use File::ShareDir;
+use Scalar::Util 'blessed';
+
+sub prepare_app
+{
+    my $self = shift;
+    if (not $self->{root})
+    {
+        my $class = blessed $self;
+        (my $dist = $class) =~ s/::/-/g;
+        $self->{root} = File::ShareDir::dist_dir($dist);
+    }
+    $self->SUPER::prepare_app;
+}
+
+sub call
+{
+    my ($self, $env) = @_;
+
+    $env->{PATH_INFO} .= 'index.php'
+        if substr($env->{PATH_INFO}, -1, 1) eq '/';
+
+    $self->SUPER::call($env);
+}
 
 1;
 __END__
@@ -26,6 +51,10 @@ __END__
 =end :list
 
 ...
+
+=head1 EXTERNAL REQUIREMENTS
+
+The C<php-cgi> binary must be available in C<$PATH>.
 
 =head1 SUPPORT
 
