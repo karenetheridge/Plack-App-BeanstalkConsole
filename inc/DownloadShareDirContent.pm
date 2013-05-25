@@ -6,6 +6,7 @@ use Moose;
 with qw(
     Dist::Zilla::Role::PrereqSource
     Dist::Zilla::Role::InstallTool
+    Dist::Zilla::Role::AfterBuild
 );
 
 use Dist::Zilla::Plugin::MakeMaker ();
@@ -32,6 +33,9 @@ sub register_prereqs {
 sub setup_installer
 {
     my $self = shift;
+
+    $self->log_fatal('A Makefile.PL has already been created. [DownloadShareDirContent] should appear in dist.ini before [MakeMaker]!')
+        if grep { $_->name eq 'Makefile.PL' } @{ $self->zilla->files };
 
     my $url = $self->url;
     my $filename = basename($url);
@@ -82,6 +86,14 @@ NEWCODE
         } ],
     );
     $meta->make_immutable;
+}
+
+sub after_build
+{
+    my $self = shift;
+
+    $self->log_fatal('No Makefile.PL was found. [DownloadShareDirContent] should appear in dist.ini before [MakeMaker]!')
+        unless grep { $_->name eq 'Makefile.PL' } @{ $self->zilla->files };
 }
 
 1;
