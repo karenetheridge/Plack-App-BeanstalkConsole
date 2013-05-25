@@ -100,13 +100,13 @@ sub after_build
 __END__
 =pod
 
-SYNOPSIS
+=head1 SYNOPSIS
 
     [DownloadShareDirContent]
     url = http://foo.com/bar.baz.gz
     skip_automated_tests = 1
 
-DESCRIPTION
+=head1 DESCRIPTION
 
 At build time, the content at the indicated URL is downloaded, extracted, and
 included as sharedir content, which can be accessed normally via
@@ -115,17 +115,19 @@ L<File::ShareDir>.
 Please consider also using [NoAutomatedTesting], so the entire cpantesters
 network doesn't hammer your server to download your content!
 
-LIMITATIONS
+=head1 LIMITATIONS
 
 Only distributions built via L<ExtUtils::MakeMaker> (that use
 L<Dist::Zilla::Plugin::MakeMaker>) are currently supported.  This plugin must
 be included in C<dist.ini> B<before> C<[MakeMaker]>.
 
-TODO
+=head1 TODO
 
 ship this as its own dist!
 
-SEE ALSO
+=head1 SEE ALSO
+
+L<Dist::Zilla::Plugin::MakeMaker>
 
 L<Dist::Zilla::Plugin::ShareDir>
 
