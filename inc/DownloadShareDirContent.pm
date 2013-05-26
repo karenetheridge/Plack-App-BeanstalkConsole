@@ -96,7 +96,7 @@ sub after_build
         unless grep { $_->name eq 'Makefile.PL' } @{ $self->zilla->files };
 }
 
-1;
+__PACKAGE__->meta->make_immutable;
 __END__
 =pod
 
