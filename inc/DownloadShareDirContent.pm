@@ -104,7 +104,6 @@ __END__
 
     [DownloadShareDirContent]
     url = http://foo.com/bar.baz.gz
-    skip_automated_tests = 1
 
 =head1 DESCRIPTION
 
