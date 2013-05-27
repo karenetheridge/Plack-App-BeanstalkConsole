@@ -3,13 +3,8 @@ use warnings;
 package inc::DownloadShareDirContent;
 
 use Moose;
-with qw(
-    Dist::Zilla::Role::PrereqSource
-    Dist::Zilla::Role::InstallTool
-    Dist::Zilla::Role::AfterBuild
-);
+extends 'Dist::Zilla::Plugin::MakeMaker::Awesome' => { -version => 0.14 };
 
-use Dist::Zilla::Plugin::MakeMaker ();
 use File::Basename;
 
 has url => (
@@ -17,8 +12,12 @@ has url => (
     required => 1,
 );
 
-sub register_prereqs {
-    my ($self) = @_;
+around register_prereqs => sub
+{
+    my $orig = shift;
+    my $self = shift;
+
+    $self->$orig(@_);
 
     $self->zilla->register_prereqs(
         { phase => 'configure' },
@@ -28,32 +27,19 @@ sub register_prereqs {
         'Archive::Extract' => 0,
         'File::ShareDir::Install' => 0.03,
     );
-}
+};
 
-sub setup_installer
+around _build_share_dir_block => sub
 {
+    my $orig = shift;
     my $self = shift;
-
-    $self->log_fatal('A Makefile.PL has already been created. [DownloadShareDirContent] should appear in dist.ini before [MakeMaker]!')
-        if grep { $_->name eq 'Makefile.PL' } @{ $self->zilla->files };
 
     my $url = $self->url;
     my $filename = basename($url);
 
-    # unfortunately there is no better way currently of modifying what
-    # MakeMaker does, other than subclassing MakeMaker and replacing it
-    # entirely
-    my $meta = Class::MOP::class_of('Dist::Zilla::Plugin::MakeMaker');
-    $meta->make_mutable;
-    Moose::Util::add_method_modifier(
-        $meta,
-        around => [ share_dir_code => sub {
-            my $orig = shift;
-            my $self = shift;
+    my $share_dir_code = $self->$orig(@_);
 
-            my $share_dir_code = $self->$orig(@_);
-
-            my $pre_preamble = <<"NEWCODE";
+    my $pre_preamble = <<"NEWCODE";
 # begin inc::DownloadShareDirContent
 use File::Spec;
 use File::Temp 'tempdir';
@@ -73,34 +59,25 @@ install_share dist => \$extract_dir;
 # end inc::DownloadShareDirContent
 NEWCODE
 
-            $share_dir_code->{preamble} =
-                $share_dir_code->{preamble}
-                ? $pre_preamble . $share_dir_code->{preamble}
-                : qq{use File::ShareDir::Install;\n} . $pre_preamble;
+    $share_dir_code->[0] =
+        $share_dir_code->[0]
+        ? $pre_preamble . $share_dir_code->[0]
+        : qq{use File::ShareDir::Install;\n} . $pre_preamble;
 
-            $share_dir_code->{postamble} =
-                qq{\{\npackage\nMY;\nuse File::ShareDir::Install qw(postamble);\n\}\n}
-                if not $share_dir_code->{postamble};
+    $share_dir_code->[1] =
+        qq{\{\npackage\nMY;\nuse File::ShareDir::Install qw(postamble);\n\}\n}
+        if not $share_dir_code->[1];
 
-            return $share_dir_code;
-        } ],
-    );
-    $meta->make_immutable;
-}
-
-sub after_build
-{
-    my $self = shift;
-
-    $self->log_fatal('No Makefile.PL was found. [DownloadShareDirContent] should appear in dist.ini before [MakeMaker]!')
-        unless grep { $_->name eq 'Makefile.PL' } @{ $self->zilla->files };
-}
+    return $share_dir_code;
+};
 
 __PACKAGE__->meta->make_immutable;
 __END__
 =pod
 
 =head1 SYNOPSIS
+
+    # remove [MakeMaker], and add:
 
     [DownloadShareDirContent]
     url = http://foo.com/bar.baz.gz

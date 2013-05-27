@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          - inc::DownloadShareDirContent has been rewritten to not patch
+            [MakeMaker] directly, but rather make use of [MakeMaker::Awesome].
 
 0.001     2013-05-26 10:00:07 PDT-0700 (Karen Etheridge)
           - Initial release.
