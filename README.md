@@ -4,13 +4,13 @@ Plack::App::BeanstalkConsole - a web application that provides access to Beansta
 
 # VERSION
 
-version 0.001
+version 0.002
 
 # SYNOPSIS
 
     use Plack::App::BeanstalkConsole;
     # accessable under /...
-    my $app = Plack::App::Console->new->to_app;
+    my $app = Plack::App::BeanstalkConsole->new->to_app;
 
     # Or mount on a specific path
     use Plack::Builder;
