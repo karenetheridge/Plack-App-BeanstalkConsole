@@ -25,7 +25,9 @@ sub call
     my ($self, $env) = @_;
 
     # / -> /public/
-    $env->{PATH_INFO} = '/public/' if $env->{PATH_INFO} eq '/';
+    # CSS is screwed up if we rewrite PATH_INFO directly here.
+    return [ '301', [ 'Location' => '/public/' ], [] ]
+        if $env->{PATH_INFO} eq '/';
 
     # */ -> */index.php
     $env->{PATH_INFO} .= 'index.php'

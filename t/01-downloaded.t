@@ -17,7 +17,13 @@ foreach my $url (
 {
     my $http_request = GET $url;
 
-    my $response = test_psgi($app, sub { shift->($http_request) });
+    # TODO: Plack::Test should do this.
+    my $response;
+    do {
+        $response = test_psgi($app, sub { shift->($http_request) });
+        $http_request->uri($response->header('location')) if $response->code eq '301';
+    }
+    until $response->code ne '301';
 
     is($response->code, '200', 'can successfully contact the app');
 }
