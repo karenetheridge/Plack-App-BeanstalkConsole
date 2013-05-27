@@ -24,6 +24,10 @@ sub call
 {
     my ($self, $env) = @_;
 
+    # / -> /public/
+    $env->{PATH_INFO} = '/public/' if $env->{PATH_INFO} eq '/';
+
+    # */ -> */index.php
     $env->{PATH_INFO} .= 'index.php'
         if substr($env->{PATH_INFO}, -1, 1) eq '/';
 
@@ -62,6 +66,9 @@ and Сергей Лысенко (Sergey Lysenko).
 The latest version of the application is downloaded at install time and saved
 as a L<File::ShareDir|share dir>, which is used by default if the C<root> is
 not overridden (see below).
+
+To use, mount the app on your server and go to the '/' URI,
+where you will be prompted to enter the address of your beanstalk server(s).
 
 =head1 METHODS
 

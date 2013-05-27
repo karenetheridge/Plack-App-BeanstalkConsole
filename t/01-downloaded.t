@@ -1,7 +1,7 @@
 use strict;
 use warnings FATAL => 'all';
 
-use Test::More tests => 2;
+use Test::More;
 use Test::Warnings;
 
 use Plack::Test;
@@ -11,6 +11,7 @@ use Plack::App::BeanstalkConsole;
 my $app = Plack::App::BeanstalkConsole->new->to_app;
 
 foreach my $url (
+    '/',
     '/public/',
 )
 {
@@ -21,4 +22,4 @@ foreach my $url (
     is($response->code, '200', 'can successfully contact the app');
 }
 
-
+done_testing;

@@ -31,6 +31,7 @@ my $app = Plack::App::BeanstalkConsole->new(
 )->to_app;
 
 foreach my $url (
+    '/',
     '/public/',
 )
 {
