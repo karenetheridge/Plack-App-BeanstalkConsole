@@ -4,7 +4,7 @@ Plack::App::BeanstalkConsole - a web application that provides access to Beansta
 
 # VERSION
 
-version 0.002
+version 0.003
 
 # SYNOPSIS
 
@@ -32,6 +32,9 @@ and Сергей Лысенко (Sergey Lysenko).
 The latest version of the application is downloaded at install time and saved
 as a [File::ShareDir](#share dir), which is used by default if the `root` is
 not overridden (see below).
+
+To use, mount the app on your server and go to the '/' URI,
+where you will be prompted to enter the address of your beanstalk server(s).
 
 # METHODS
 
