@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.004     2013-05-27 12:07:05 PDT-0700 (Karen Etheridge)
           - fix '/' URI redirection - direct mapping confuses CSS
 
 0.003     2013-05-27 11:23:03 PDT-0700 (Karen Etheridge)

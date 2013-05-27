@@ -4,7 +4,7 @@ Plack::App::BeanstalkConsole - a web application that provides access to Beansta
 
 # VERSION
 
-version 0.003
+version 0.004
 
 # SYNOPSIS
 
