@@ -112,10 +112,14 @@ I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 
 =head1 SEE ALSO
 
+=for stopwords beanstalkd
+
 L<Plack>
 
 L<Plack::App::PHPCGIFile>
 
 L<Beanstalk Console|https://github.com/ptrofimov/beanstalk_console>
+
+L<beanstalkd|http://kr.github.com/beanstalkd>
 
 =cut
