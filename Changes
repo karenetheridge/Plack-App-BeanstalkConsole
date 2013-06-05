@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.005     2013-06-05 17:22:59 CDT-0500 (Karen Etheridge)
           - installer bails out if php-cgi is not installed
 
 0.004     2013-05-27 12:07:05 PDT-0700 (Karen Etheridge)

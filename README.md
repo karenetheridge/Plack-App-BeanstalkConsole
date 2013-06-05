@@ -4,7 +4,7 @@ Plack::App::BeanstalkConsole - a web application that provides access to Beansta
 
 # VERSION
 
-version 0.004
+version 0.005
 
 # SYNOPSIS
 
@@ -66,11 +66,10 @@ I am also usually active on irc, as 'ether' at `irc.perl.org`.
 
 # SEE ALSO
 
-[Plack](http://search.cpan.org/perldoc?Plack)
-
-[Plack::App::PHPCGIFile](http://search.cpan.org/perldoc?Plack::App::PHPCGIFile)
-
-[Beanstalk Console](https://github.com/ptrofimov/beanstalk\_console)
+- [Plack](http://search.cpan.org/perldoc?Plack)
+- [Plack::App::PHPCGIFile](http://search.cpan.org/perldoc?Plack::App::PHPCGIFile)
+- [Beanstalk Console](https://github.com/ptrofimov/beanstalk\_console)
+- [beanstalkd](http://kr.github.com/beanstalkd)
 
 # AUTHOR
 
