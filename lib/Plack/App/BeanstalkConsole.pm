@@ -7,6 +7,7 @@ use parent 'Plack::App::PHPCGIFile';
 
 use File::ShareDir;
 use Scalar::Util 'blessed';
+use namespace::autoclean;
 
 sub prepare_app
 {
