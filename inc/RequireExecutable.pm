@@ -40,6 +40,7 @@ sub setup_installer
 
 __PACKAGE__->meta->make_immutable;
 __END__
+
 =pod
 
 =head1 SYNOPSIS
