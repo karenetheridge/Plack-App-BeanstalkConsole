@@ -6,6 +6,7 @@ use Moose;
 extends 'Dist::Zilla::Plugin::MakeMaker::Awesome' => { -version => 0.14 };
 
 use File::Basename;
+use namespace::autoclean;
 
 has url => (
     is => 'ro', isa => 'Str',

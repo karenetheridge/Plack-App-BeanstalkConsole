@@ -5,6 +5,7 @@ package inc::RequireExecutable;
 use Moose;
 with 'Dist::Zilla::Role::PrereqSource',
     'Dist::Zilla::Role::InstallTool';
+use namespace::autoclean;
 
 has executable => (
     is => 'ro', isa => 'Str',
