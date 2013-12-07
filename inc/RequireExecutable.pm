@@ -3,12 +3,25 @@ use warnings;
 package inc::RequireExecutable;
 
 use Moose;
-with 'Dist::Zilla::Role::InstallTool';
+with 'Dist::Zilla::Role::PrereqSource',
+    'Dist::Zilla::Role::InstallTool';
 
 has executable => (
     is => 'ro', isa => 'Str',
     required => 1,
 );
+
+sub register_prereqs
+{
+    my $self = shift;
+    $self->zilla->register_prereqs(
+        {
+            type  => 'requires',
+            phase => 'configure',
+        },
+        'File::Which' => 0,
+    );
+}
 
 sub setup_installer
 {

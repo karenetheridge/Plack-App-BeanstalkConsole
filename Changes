@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          - declare extra module used in Makefile.PL as configure_requires
 
 0.005     2013-06-05 17:22:59 CDT-0500 (Karen Etheridge)
           - installer bails out if php-cgi is not installed
