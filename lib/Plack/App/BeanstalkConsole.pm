@@ -75,9 +75,7 @@ where you will be prompted to enter the address of your beanstalk server(s).
 
 =head1 METHODS
 
-=over 4
-
-=item * C<new>
+=head2 C<new>
 
     Plack::App::BeanstalkConsole->new(<options>)
 
@@ -93,8 +91,6 @@ contains the PHP code to be mounted. (In this way it functions just like
 L<Plack::App::PHPCGIFile>.)
 
     Plack::App::BeanstalkConsole->new(root => 'path/to/beanstalk_console')
-
-=back
 
 =back
 
