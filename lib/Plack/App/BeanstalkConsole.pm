@@ -44,13 +44,13 @@ __END__
 =head1 SYNOPSIS
 
     use Plack::App::BeanstalkConsole;
-    # accessable under /...
+    # accessible under /...
     my $app = Plack::App::BeanstalkConsole->new->to_app;
 
     # Or mount on a specific path
     use Plack::Builder;
     builder {
-        # accessable under /beanstalk/...
+        # accessible under /beanstalk/...
         mount beanstalk => Plack::App::BeanstalkConsole->new;
     };
 
