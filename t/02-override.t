@@ -12,6 +12,7 @@ if (not -d 't/app')
     {
         diag "symlinking $sharedir <- t/app for override tests";
         symlink($sharedir, 't/app');
+        END { unlink 't/app' }
     }
     else
     {
