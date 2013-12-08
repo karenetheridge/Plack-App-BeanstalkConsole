@@ -27,15 +27,18 @@ sub register_prereqs
 sub setup_installer
 {
     my $self = shift;
-    my ($mfpl) = grep { $_->name eq 'Makefile.PL' } @{ $self->zilla->files };
 
-    $self->log_fatal('No Makefile.PL was found. [=' . __PACKAGE__ . '] should appear in dist.ini after your installer!')
-        unless $mfpl;
+    my @build_files  = grep { $_->name eq 'Makefile.PL' or $_->name eq 'Build.PL' } @{ $self->zilla->files };
 
+    $self->log_fatal('No Makefile.PL or Build.PL was found. [=' . __PACKAGE__ . '] should appear in dist.ini after your installer!')
+        unless @build_files;
 
-    my $content = 'use File::Which;' . "\n"
-        . 'do { print "' . $self->executable . ' not found; aborting.\\n"; ' . 'exit 0 } if not which("' . $self->executable . '");' . "\n";
-    $mfpl->content( $content . $mfpl->content );
+    foreach my $file (@build_files)
+    {
+        my $content = 'use File::Which;' . "\n"
+            . 'do { print "' . $self->executable . ' not found; aborting.\\n"; ' . 'exit 0 } if not which("' . $self->executable . '");' . "\n";
+        $file->content( $content . $file->content );
+    }
     return;
 }
 

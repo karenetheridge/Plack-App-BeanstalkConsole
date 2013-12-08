@@ -3,8 +3,8 @@ use warnings;
 package inc::DownloadShareDirContent;
 
 use Moose;
-extends 'Dist::Zilla::Plugin::MakeMaker::Awesome' => { -version => 0.14 };
-
+use Dist::Zilla::Plugin::MakeMaker::Awesome 0.14;   # base class to [MakeMaker::Fallback]
+extends 'Dist::Zilla::Plugin::MakeMaker::Fallback';
 use File::Basename;
 use namespace::autoclean;
 
@@ -30,18 +30,17 @@ around register_prereqs => sub
     );
 };
 
-around _build_share_dir_block => sub
-{
-    my $orig = shift;
-    my $self = shift;
+has download_app_content => (
+    is => 'ro', isa => 'Str',
+    lazy => 1, default => sub {
+        my $self = shift;
 
-    my $url = $self->url;
-    my $filename = basename($url);
+        my $url = $self->url;
+        my $filename = basename($url);
 
-    my $share_dir_code = $self->$orig(@_);
-
-    my $pre_preamble = <<"NEWCODE";
-# begin inc::DownloadShareDirContent
+        # we need to download the file to share/ or Module::Build::Tiny won't like it.
+        return <<"DOWNLOAD_PHP_APP";
+# begin inc::DownloadShareDirContent (1)
 use File::Spec;
 use File::Temp 'tempdir';
 use HTTP::Tiny;
@@ -52,13 +51,49 @@ print "downloading $url to \$archive_file...\n";
 my \$response = HTTP::Tiny->new->mirror('$url', \$archive_file);
 \$response->{success} or die "failed to download $url into \$archive_file";
 
-my \$extract_dir = tempdir;
+my \$extract_dir = 'share';
 my \$ae = Archive::Extract->new(archive => \$archive_file);
 \$ae->extract(to => \$extract_dir) or die "failed to extract \$archive_file to \$extract_dir ";
+# end inc::DownloadShareDirContent (1)
+DOWNLOAD_PHP_APP
+    },
+);
 
-install_share dist => \$extract_dir;
-# end inc::DownloadShareDirContent
-NEWCODE
+around setup_installer => sub
+{
+    my $orig = shift;
+    my $self = shift;
+
+    my @build_files  = grep { $_->name eq 'Build.PL' } @{ $self->zilla->files };
+
+    $self->log_fatal('No Build.PL was found. This plugin should appear in dist.ini after [ModuleBuild*]!')
+        if not @build_files;
+
+    foreach my $file (@build_files)
+    {
+        $file->content($self->download_app_content . $file->content);
+    }
+
+    # continue with [MakeMaker::Awesome]'s stuff
+    return $self->$orig(@_);
+};
+
+around _build_share_dir_block => sub
+{
+    my $orig = shift;
+    my $self = shift;
+
+    my $url = $self->url;
+    my $filename = basename($url);
+
+    my $share_dir_code = $self->$orig(@_);
+
+    my $pre_preamble = $self->download_app_content . <<'INSTALL_SHARE';
+
+# begin inc::DownloadShareDirContent (2)
+install_share dist => $extract_dir;
+# end inc::DownloadShareDirContent (2)
+INSTALL_SHARE
 
     $share_dir_code->[0] =
         $share_dir_code->[0]
