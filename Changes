@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.006     2013-12-08 04:40:53Z
           - declare extra module used in Makefile.PL as configure_requires
           - now also shipping a Build.PL, with Makefile.PL serving as a
             fallback
