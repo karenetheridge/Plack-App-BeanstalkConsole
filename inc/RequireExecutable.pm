@@ -30,7 +30,7 @@ sub setup_installer
 
     my @build_files  = grep { $_->name eq 'Makefile.PL' or $_->name eq 'Build.PL' } @{ $self->zilla->files };
 
-    $self->log_fatal('No Makefile.PL or Build.PL was found. [=' . __PACKAGE__ . '] should appear in dist.ini after your installer!')
+    $self->log_fatal('No Makefile.PL or Build.PL was found. [=' . __PACKAGE__ . '] should appear in dist.ini after your installer plugin(s)!')
         unless @build_files;
 
     foreach my $file (@build_files)
