@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.007     2013-12-10 20:08:34Z
           - now properly dying in build, rather than exiting with status 0, if
             required php-cgi executable is not available
 
