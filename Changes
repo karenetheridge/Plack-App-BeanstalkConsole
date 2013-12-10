@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          - now properly dying in build, rather than exiting with status 0, if
+            required php-cgi executable is not available
 
 0.006     2013-12-08 04:40:53Z
           - declare extra module used in Makefile.PL as configure_requires

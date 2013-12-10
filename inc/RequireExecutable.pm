@@ -36,7 +36,7 @@ sub setup_installer
     foreach my $file (@build_files)
     {
         my $content = 'use File::Which;' . "\n"
-            . 'do { print "' . $self->executable . ' not found; aborting.\\n"; ' . 'exit 0 } if not which("' . $self->executable . '");' . "\n";
+            . 'die "' . $self->executable . ' not found; aborting" if not which("' . $self->executable . '");' . "\n";
         $file->content( $content . $file->content );
     }
     return;
