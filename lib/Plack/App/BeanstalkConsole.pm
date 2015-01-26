@@ -6,16 +6,15 @@ package Plack::App::BeanstalkConsole;
 
 use parent 'Plack::App::PHPCGIFile';
 
-use File::ShareDir;
-use Scalar::Util 'blessed';
-use namespace::autoclean;
+use File::ShareDir ();
+use Scalar::Util ();
 
 sub prepare_app
 {
     my $self = shift;
     if (not $self->{root})
     {
-        my $class = blessed $self;
+        my $class = Scalar::Util::blessed($self);
         (my $dist = $class) =~ s/::/-/g;
         $self->{root} = File::ShareDir::dist_dir($dist);
     }
