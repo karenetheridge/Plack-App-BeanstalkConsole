@@ -1,4 +1,7 @@
+/.ackrc
 /.build/
-!.gitignore
-/Plack-App-BeanstalkConsole-*
+!/.gitignore
+/.latest
+/Plack-App-BeanstalkConsole-*/
+/Plack-App-BeanstalkConsole-*.tar.gz
 /t/app/
