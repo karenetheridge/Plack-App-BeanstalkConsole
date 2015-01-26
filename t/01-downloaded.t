@@ -2,7 +2,7 @@ use strict;
 use warnings FATAL => 'all';
 
 use Test::More;
-use Test::Warnings;
+#use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
 use Plack::Test;
 use HTTP::Request::Common;
 
