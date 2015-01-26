@@ -10,11 +10,8 @@ BEGIN {
     if (-d '.git')
     {
         die 'missing t/app!' unless -d 't/app' and glob("t/app/*");
-        note 'creating hard link: share -> t/app';
-        link 't/app', 'share';
-        END { unlink 'share' };
         require Test::File::ShareDir;
-        Test::File::ShareDir->import(-share => { -dist => { 'Plack-App-BeanstalkConsole' => 'share' }});
+        Test::File::ShareDir->import(-share => { -dist => { 'Plack-App-BeanstalkConsole' => 't/app' }});
     }
 }
 
