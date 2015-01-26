@@ -112,13 +112,10 @@ I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 
 =for stopwords beanstalkd
 
-=begin :list
-
+=for :list
 * L<Plack>
 * L<Plack::App::PHPCGIFile>
 * L<Beanstalk Console|https://github.com/ptrofimov/beanstalk_console>
 * L<beanstalkd|http://kr.github.com/beanstalkd>
-
-=end :list
 
 =cut
