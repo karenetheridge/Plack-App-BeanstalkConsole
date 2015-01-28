@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.008     2015-01-28 04:20:36Z
           - no longer failing tests due to warnings in Plack::App::PHPCGI
           on perl 5.19.4 and greater
 
