@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 use Test::More;
-#use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
+use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
 
 if (not -d 't/app')
 {
