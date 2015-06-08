@@ -15,20 +15,20 @@ Revision history for Plack-App-BeanstalkConsole
           - now also shipping a Build.PL, with Makefile.PL serving as a
             fallback
 
-0.005     2013-06-05 17:22:59 CDT-0500 (Karen Etheridge)
+0.005     2013-06-05 22:22:59Z
           - installer bails out if php-cgi is not installed
 
-0.004     2013-05-27 12:07:05 PDT-0700 (Karen Etheridge)
+0.004     2013-05-27 19:07:05Z
           - fix '/' URI redirection - direct mapping confuses CSS
 
-0.003     2013-05-27 11:23:03 PDT-0700 (Karen Etheridge)
+0.003     2013-05-27 18:23:03Z
           - the '/' URI is now mapped to '/public/', to avoid a bit of newbie
             confusion
 
-0.002     2013-05-26 17:32:41 PDT-0700 (Karen Etheridge)
+0.002     2013-05-27 00:32:41Z
           - inc::DownloadShareDirContent has been rewritten to not patch
             [MakeMaker] directly, but rather make use of [MakeMaker::Awesome].
 
-0.001     2013-05-26 10:00:07 PDT-0700 (Karen Etheridge)
+0.001     2013-05-26 17:00:07Z
           - Initial release.
 
