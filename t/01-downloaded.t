@@ -34,7 +34,7 @@ foreach my $url (
     }
     until $response->code ne '301';
 
-    is($response->code, '200', 'can successfully contact the app');
+    is($response->code, '200', "can successfully contact the app at $url");
 }
 
 done_testing;
