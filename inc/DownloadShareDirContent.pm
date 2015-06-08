@@ -46,14 +46,14 @@ use File::Temp 'tempdir';
 use HTTP::Tiny;
 use Archive::Extract;
 
-my \$archive_file = File::Spec->catfile(tempdir(CLEANUP => 1), "$filename");
+my \$archive_file = File::Spec->catfile(tempdir(CLEANUP => 1), '$filename');
 print "downloading $url to \$archive_file...\n";
 my \$response = HTTP::Tiny->new->mirror('$url', \$archive_file);
 \$response->{success} or die "failed to download $url into \$archive_file";
 
 my \$extract_dir = 'share';
 my \$ae = Archive::Extract->new(archive => \$archive_file);
-\$ae->extract(to => \$extract_dir) or die "failed to extract \$archive_file to \$extract_dir ";
+\$ae->extract(to => \$extract_dir) or die "failed to extract \$archive_file to \$extract_dir";
 # end inc::DownloadShareDirContent (1)
 DOWNLOAD_PHP_APP
     },
