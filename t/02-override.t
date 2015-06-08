@@ -19,7 +19,7 @@ if (not -d 't/app')
         # if we hit this case, we must be running a copy directly out of git
         # rather than an uploaded version, *and* do not have a copy of the app
         # in t/app/ that the primary developer has
-        plan skip_all => 'copy the app from github to t/app/ for these tests';
+        die 'missing t/app: run in-repo Makefile.PL!';
     }
 }
 

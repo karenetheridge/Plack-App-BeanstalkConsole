@@ -2,6 +2,10 @@
 /.build/
 !/.gitignore
 /.latest
+/MYMETA.*
+/Makefile
+/Makefile.old
+/_eumm/
 /Plack-App-BeanstalkConsole-*/
 /Plack-App-BeanstalkConsole-*.tar.gz
 /t/app/

@@ -9,7 +9,7 @@ use HTTP::Request::Common;
 BEGIN {
     if (-d '.git')
     {
-        die 'missing t/app!' unless -d 't/app' and glob("t/app/*");
+        die 'missing t/app: run in-repo Makefile.PL!' unless -d 't/app' and glob("t/app/*");
         require Test::File::ShareDir;
         Test::File::ShareDir->import(-share => { -dist => { 'Plack-App-BeanstalkConsole' => 't/app' }});
     }
