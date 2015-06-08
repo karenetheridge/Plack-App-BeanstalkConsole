@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 package Plack::App::BeanstalkConsole;
-# ABSTRACT: a web application that provides access to Beanstalk statistics and tools
+# ABSTRACT: A web application that provides access to Beanstalk statistics and tools
 # KEYWORDS: beanstalk jobs queue web application dashboard console plack psgi
 
 use parent 'Plack::App::PHPCGIFile';
