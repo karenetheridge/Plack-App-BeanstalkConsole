@@ -103,14 +103,6 @@ L<Plack::App::PHPCGIFile>.)
 The C<php-cgi> binary must be available in C<$PATH>.  In newer versions of
 PHP, this is is normally installed as part of the main PHP installation.
 
-=head1 SUPPORT
-
-=for stopwords irc
-
-Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Plack-App-BeanstalkConsole>
-(or L<bug-Plack-App-BeanstalkConsole@rt.cpan.org|mailto:bug-Plack-App-BeanstalkConsole@rt.cpan.org>).
-I am also usually active on irc, as 'ether' at C<irc.perl.org>.
-
 =head1 SEE ALSO
 
 =for stopwords beanstalkd
