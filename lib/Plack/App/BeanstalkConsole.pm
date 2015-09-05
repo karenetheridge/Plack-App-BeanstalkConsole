@@ -3,7 +3,7 @@ use warnings;
 package Plack::App::BeanstalkConsole;
 # ABSTRACT: A web application that provides access to Beanstalk statistics and tools
 # KEYWORDS: beanstalk jobs queue web application dashboard console plack psgi
-# vim: set ts=8 sts=4 sw=4 tw=78 et :
+# vim: set ts=8 sts=4 sw=4 tw=115 et :
 
 our $VERSION = '0.009';
 
