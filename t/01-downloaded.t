@@ -11,6 +11,8 @@ BEGIN {
     {
         die 'missing t/app: run in-repo Makefile.PL!' unless -d 't/app' and glob("t/app/*");
         require Test::File::ShareDir;
+
+        note 'pointing distribution sharedir to t/app';
         Test::File::ShareDir->import(-share => { -dist => { 'Plack-App-BeanstalkConsole' => 't/app' }});
     }
 }
