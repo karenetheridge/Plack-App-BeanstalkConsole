@@ -3,6 +3,7 @@ use warnings;
 
 use Test::More 0.88;
 use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
+use Config;
 
 if (not -d 't/app')
 {
@@ -10,6 +11,7 @@ if (not -d 't/app')
 
     if (-d $sharedir and glob("$sharedir/*"))
     {
+        plan skip_all => 'cannot create symlinks on this system' if not $Config{d_symlink};
         diag "symlinking $sharedir <- t/app for override tests";
         symlink($sharedir, 't/app');
         END { unlink 't/app' }
