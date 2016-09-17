@@ -51,9 +51,11 @@ print "downloading $url to \$archive_file...\n";
 my \$response = HTTP::Tiny->new->mirror('$url', \$archive_file);
 \$response->{success} or die "failed to download $url into \$archive_file";
 
-my \$extract_dir = 'share';
+my \$extract_dir = '.';
+my \$share_dir = 'share';
 my \$ae = Archive::Extract->new(archive => \$archive_file);
 \$ae->extract(to => \$extract_dir) or die "failed to extract \$archive_file to \$extract_dir";
+rename('beanstalk_console-master', \$share_dir);
 # end inc::DownloadShareDirContent (1)
 DOWNLOAD_PHP_APP
     },
@@ -91,7 +93,7 @@ around _build_share_dir_block => sub
     my $pre_preamble = $self->download_app_content . <<'INSTALL_SHARE';
 
 # begin inc::DownloadShareDirContent (2)
-install_share dist => $extract_dir;
+install_share dist => $share_dir;
 # end inc::DownloadShareDirContent (2)
 INSTALL_SHARE
 

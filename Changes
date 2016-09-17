@@ -1,6 +1,8 @@
 Revision history for Plack-App-BeanstalkConsole
 
 {{$NEXT}}
+          - update the download URL for the PHP application (thanks, Thomas
+            Sibley!) (RT#117891)
 
 0.008     2015-01-28 04:20:36Z
           - no longer failing tests due to warnings in Plack::App::PHPCGI
