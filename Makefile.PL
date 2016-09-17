@@ -2,11 +2,13 @@ use strict;
 use warnings;
 use lib 'inc';
 use ExtUtils::MakeMaker::Dist::Zilla::Develop;
+
 WriteMakefile(
     NAME => 'Plack::App::BeanstalkConsole',
     VERSION_FROM => 'lib/Plack/App/BeanstalkConsole.pm',
     INSTALLMAN1DIR => 'none',
     INSTALLMAN3DIR => 'none',
+    NORECURS => 1,
 );
 
 if (not -d 't/app/public') {
