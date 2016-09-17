@@ -5,7 +5,7 @@ package Plack::App::BeanstalkConsole;
 # KEYWORDS: beanstalk jobs queue web application dashboard console plack psgi
 # vim: set ts=8 sts=4 sw=4 tw=115 et :
 
-our $VERSION = '0.009';
+our $VERSION = '0.010';
 
 use parent 'Plack::App::PHPCGIFile';
 
