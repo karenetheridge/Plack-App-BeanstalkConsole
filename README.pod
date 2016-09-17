@@ -4,11 +4,11 @@
 
 =head1 NAME
 
-Plack::App::BeanstalkConsole - a web application that provides access to Beanstalk statistics and tools
+Plack::App::BeanstalkConsole - A web application that provides access to Beanstalk statistics and tools
 
 =head1 VERSION
 
-version 0.008
+version 0.009
 
 =head1 SYNOPSIS
 
@@ -68,14 +68,6 @@ L<Plack::App::PHPCGIFile>.)
 The C<php-cgi> binary must be available in C<$PATH>.  In newer versions of
 PHP, this is is normally installed as part of the main PHP installation.
 
-=head1 SUPPORT
-
-=for stopwords irc
-
-Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Plack-App-BeanstalkConsole>
-(or L<bug-Plack-App-BeanstalkConsole@rt.cpan.org|mailto:bug-Plack-App-BeanstalkConsole@rt.cpan.org>).
-I am also usually active on irc, as 'ether' at C<irc.perl.org>.
-
 =head1 SEE ALSO
 
 =for stopwords beanstalkd
@@ -100,11 +92,24 @@ L<beanstalkd|http://kr.github.com/beanstalkd>
 
 =back
 
+=head1 SUPPORT
+
+Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=Plack-App-BeanstalkConsole>
+(or L<bug-Plack-App-BeanstalkConsole@rt.cpan.org|mailto:bug-Plack-App-BeanstalkConsole@rt.cpan.org>).
+
+There is also a mailing list available for users of this distribution, at
+L<https://groups.google.com/forum/#!forum/psgi-plack>.
+
+There is also an irc channel available for users of this distribution, at
+L<C<#plack> on C<irc.perl.org>|irc://irc.perl.org/#plack>.
+
+I am also usually active on irc, as 'ether' at C<irc.perl.org>.
+
 =head1 AUTHOR
 
 Karen Etheridge <ether@cpan.org>
 
-=head1 COPYRIGHT AND LICENSE
+=head1 COPYRIGHT AND LICENCE
 
 This software is copyright (c) 2013 by Karen Etheridge.
 

@@ -1,6 +1,6 @@
 Revision history for Plack-App-BeanstalkConsole
 
-{{$NEXT}}
+0.009     2016-09-17 04:21:38Z
           - update the download URL for the PHP application (thanks, Thomas
             Sibley!) (RT#117891)
 
