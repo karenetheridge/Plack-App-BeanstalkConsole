@@ -5,7 +5,7 @@ package Plack::App::BeanstalkConsole;
 # ABSTRACT: A web application that provides access to Beanstalk statistics and tools
 # KEYWORDS: beanstalk jobs queue web application dashboard console plack psgi
 
-our $VERSION = '0.010';
+our $VERSION = '0.011';
 
 use parent 'Plack::App::PHPCGIFile';
 
