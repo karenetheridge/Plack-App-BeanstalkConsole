@@ -33,6 +33,9 @@ if (not -d 't/app') {
     rename("$extract_dir/$appdir", 't/app')
     or warn "Cannot rename('$extract_dir/$appdir' to 't/app'): $!";
 
+    # ensure local data storage file is writable
+    chmod 0644, 't/app/storage.json';
+
     -d 't/app' and -d 't/app/lib' and -d 't/app/public'
         or die 'something went wrong extracting the application';
 

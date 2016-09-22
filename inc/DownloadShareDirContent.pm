@@ -56,6 +56,10 @@ my \$share_dir = 'share';
 my \$ae = Archive::Extract->new(archive => \$archive_file);
 \$ae->extract(to => \$extract_dir) or die "failed to extract \$archive_file to \$extract_dir";
 rename('beanstalk_console-master', \$share_dir);
+
+# ensure local data storage file is writable
+chmod(0644, File::Spec->catfile(\$share_dir, 'storage.json'));
+
 # end inc::DownloadShareDirContent (1)
 DOWNLOAD_PHP_APP
     },
