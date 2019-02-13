@@ -70,7 +70,7 @@ around setup_installer => sub
     my $orig = shift;
     my $self = shift;
 
-    my @build_files  = grep { $_->name eq 'Build.PL' } @{ $self->zilla->files };
+    my @build_files  = grep $_->name eq 'Build.PL', @{ $self->zilla->files };
 
     $self->log_fatal('No Build.PL was found. This plugin should appear in dist.ini after [ModuleBuild*]!')
         if not @build_files;
