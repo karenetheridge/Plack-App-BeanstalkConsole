@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-package DownloadShareDirContent;
+package inc::DownloadShareDirContent;
 
 use Moose;
 use Dist::Zilla::Plugin::MakeMaker::Awesome 0.14;   # base class to [MakeMaker::Fallback]
@@ -40,7 +40,7 @@ has download_app_content => (
 
         # we need to download the file to share/ or Module::Build::Tiny won't like it.
         return <<"DOWNLOAD_PHP_APP";
-# begin DownloadShareDirContent (1)
+# begin inc::DownloadShareDirContent (1)
 use File::Spec;
 use File::Temp 'tempdir';
 use HTTP::Tiny;
@@ -60,7 +60,7 @@ rename('beanstalk_console-master', \$share_dir);
 # ensure local data storage file is writable
 chmod(0644, File::Spec->catfile(\$share_dir, 'storage.json'));
 
-# end DownloadShareDirContent (1)
+# end inc::DownloadShareDirContent (1)
 DOWNLOAD_PHP_APP
     },
 );
@@ -96,9 +96,9 @@ around _build_share_dir_block => sub
 
     my $pre_preamble = $self->download_app_content . <<'INSTALL_SHARE';
 
-# begin DownloadShareDirContent (2)
+# begin inc::DownloadShareDirContent (2)
 install_share dist => $share_dir;
-# end DownloadShareDirContent (2)
+# end inc::DownloadShareDirContent (2)
 INSTALL_SHARE
 
     $share_dir_code->[0] =
