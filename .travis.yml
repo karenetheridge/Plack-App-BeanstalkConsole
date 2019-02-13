@@ -23,7 +23,7 @@ perl:
 env:
   global:
     - AUTHOR_TESTING=1
-    - AUTOMATED_TESTING=1
+    - AUTOMATED_TESTING=0 # yes, let's!
     - RELEASE_TESTING=0
 before_install:
   - git clone git://github.com/travis-perl/helpers ~/travis-perl-helpers
