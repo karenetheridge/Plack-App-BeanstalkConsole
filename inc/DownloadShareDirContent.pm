@@ -47,7 +47,7 @@ use HTTP::Tiny;
 use Archive::Extract;
 
 my \$archive_file = File::Spec->catfile(tempdir(CLEANUP => 1), '$filename');
-print "downloading $url to \$archive_file...\n";
+print "downloading $url to \$archive_file...\\n";
 my \$response = HTTP::Tiny->new->mirror('$url', \$archive_file);
 \$response->{success} or die "failed to download $url into \$archive_file";
 
