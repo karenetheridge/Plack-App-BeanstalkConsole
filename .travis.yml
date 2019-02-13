@@ -3,6 +3,8 @@ addons:
     packages:
       - aspell
       - aspell-en
+      - php5
+      - php5-cgi
 language: perl
 perl:
   - blead       # builds perl from git
