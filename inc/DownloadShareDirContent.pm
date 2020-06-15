@@ -39,29 +39,31 @@ has download_app_content => (
         my $filename = basename($url);
 
         # we need to download the file to share/ or Module::Build::Tiny won't like it.
-        return <<"DOWNLOAD_PHP_APP";
+        my $content = <<'DOWNLOAD_PHP_APP';
 # begin inc::DownloadShareDirContent (1)
 use File::Spec;
 use File::Temp 'tempdir';
 use HTTP::Tiny;
 use Archive::Extract;
 
-my \$archive_file = File::Spec->catfile(tempdir(CLEANUP => 1), '$filename');
-print "downloading $url to \$archive_file...\\n";
-my \$response = HTTP::Tiny->new->mirror('$url', \$archive_file);
-\$response->{success} or die "failed to download $url into \$archive_file";
+my $archive_file = File::Spec->catfile(tempdir(CLEANUP => 1), '%s');
+print "downloading %s to $archive_file...\n";
+my $response = HTTP::Tiny->new->mirror('%s', $archive_file);
+$response->{success} or die "failed to download %s into $archive_file";
 
-my \$extract_dir = '.';
-my \$share_dir = 'share';
-my \$ae = Archive::Extract->new(archive => \$archive_file);
-\$ae->extract(to => \$extract_dir) or die "failed to extract \$archive_file to \$extract_dir";
-rename('beanstalk_console-master', \$share_dir);
+my $extract_dir = '.';
+my $share_dir = 'share';
+my $ae = Archive::Extract->new(archive => $archive_file);
+$ae->extract(to => $extract_dir) or die "failed to extract $archive_file to $extract_dir";
+rename('beanstalk_console-master', $share_dir);
 
 # ensure local data storage file is writable
-chmod(0644, File::Spec->catfile(\$share_dir, 'storage.json'));
+chmod(0644, File::Spec->catfile($share_dir, 'storage.json'));
 
 # end inc::DownloadShareDirContent (1)
 DOWNLOAD_PHP_APP
+
+        return sprintf($content, $filename, $url, $url, $url);
     },
 );
 
